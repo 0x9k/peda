@@ -68,5 +68,6 @@ else:
     self.__arch = 4#32
 ```
 
->(python gdb resources)[http://www.programcreek.com/python/example/22500/gdb.execute]    
+>(python gdb resources)[http://www.programcreek.com/python/example/22500/gdb.execute]
+    
 >(gdb api)[https://vecr.ece.villanova.edu/vecr/doc/gdb/]
