@@ -6140,6 +6140,17 @@ Alias("stack", "peda telescope $sp")
 Alias("viewmem", "peda telescope")
 Alias("reg", "peda xinfo register")
 
+#heap utils
+from heap_utils import *
+GlibcHeapArenaCommand()
+GlibcHeapCommand()
+GlibcHeapChunkCommand()
+GlibcHeapBinsCommand()
+GlibcHeapUnsortedBinsCommand()
+GlibcHeapFastbinsYCommand()
+GlibcHeapSmallBinsCommand()
+GlibcHeapLargeBinsCommand()
+
 # misc gdb settings
 peda.execute("set confirm off")
 peda.execute("set verbose off")
