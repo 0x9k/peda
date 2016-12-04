@@ -69,3 +69,4 @@ else:
 ```
 
 >(python gdb resources)[http://www.programcreek.com/python/example/22500/gdb.execute]
+>(gdb api)[https://vecr.ece.villanova.edu/vecr/doc/gdb/]
