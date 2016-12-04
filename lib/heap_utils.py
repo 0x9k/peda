@@ -731,21 +731,32 @@ class GlibcHeapFastbinsYCommand(GlibcGenericCommand):
             return
 
         arena = GlibcArena("main_arena")
+        fastbin_list = []#avoid ring
+        flag_finish = False#avoid ring
         arena_addr = arena.get_main_arena_addr()
         self.msg(colorize("Information on FastBins of arena '{0}'".format(hex(arena_addr)), "white"))
         for i in range(10):
             m = "Fastbin[{:d}] ".format(i,)
             chunk = arena.fastbin(i)
+            if chunk is None:#none other fastbins
+                break
+            if chunk.chunk_data_addr not in fastbin_list:
+                fastbin_list.append(chunk.chunk_data_addr)
             while True:
                 if chunk is None:
                     m+= "0x00"
                     break
                 try:
                     m+= "{0}  {1}  ".format(right_arrow, str(chunk))
-                    next_chunk = chunk.get_fwd_ptr()#-1终止 成环打印不出来 就挂了 需要修复 设置列表?元祖来修复?
+                    if flag_finish == True:
+                        break
+                    next_chunk = chunk.get_fwd_ptr()#-1终止
                     if next_chunk == -1:
                         break
                     chunk = GlibcChunk(next_chunk,from_base_flag=True)
+                    if chunk.chunk_data_addr in fastbin_list:
+                        flag_finish = True
+                    fastbin_list.append(chunk.chunk_data_addr)
                 except gdb.MemoryError:
                     break
             self.msg(colorize("{0}".format(m), "purple"))
