@@ -731,11 +731,11 @@ class GlibcHeapFastbinsYCommand(GlibcGenericCommand):
             return
 
         arena = GlibcArena("main_arena")
-        fastbin_list = []#avoid ring
-        flag_finish = False#avoid ring
         arena_addr = arena.get_main_arena_addr()
         self.msg(colorize("Information on FastBins of arena '{0}'".format(hex(arena_addr)), "white"))
         for i in range(10):
+            fastbin_list = []#avoid ring
+            flag_finish = False#avoid ring
             m = "Fastbin[{:d}] ".format(i,)
             chunk = arena.fastbin(i)
             if chunk is None:#none other fastbins
