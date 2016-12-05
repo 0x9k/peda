@@ -739,7 +739,7 @@ class GlibcHeapFastbinsYCommand(GlibcGenericCommand):
             m = "Fastbin[{:d}] ".format(i,)
             chunk = arena.fastbin(i)
             if chunk is None:#none other fastbins
-                break
+                continue
             if chunk.chunk_data_addr not in fastbin_list:
                 fastbin_list.append(chunk.chunk_data_addr)
             while True:
