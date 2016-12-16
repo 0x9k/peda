@@ -88,7 +88,8 @@ class GlibcArena:
         else:
             self.__arch = 4#32
         arena = gdb.parse_and_eval(addr)
-        self.__arena = arena.cast(gdb.lookup_type("struct malloc_state")).reference_value()
+        #self.__arena = arena.cast(gdb.lookup_type("struct malloc_state")).reference_value()
+        self.__arena = arena.cast(gdb.lookup_type("struct malloc_state"))
         self.__main_arena_addr = self.__arena.address
         self.__top = self.__arena['top']
         self.__last_remainder = self.__arena['last_remainder']
